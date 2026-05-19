@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/src/style.css">
+
+  <title>Torre de Controle - Aeroporto</title>
+</head>
+
+<body>
+  <div id="app">
+    <aside class="app__aside">
+      <header class="app__aside__header">
+        <h1 class="title">Aeroporto</h1>
+        <div class="divisor"></div>
+        <h2 class="subtitle">Torre de controle</h2>
+      </header>
+      <section class="app__aside__content">
+        <ul class="app__aside__estatisticas">
+          <li class="app__aside__estatistica" data-estatistica="geral">
+            <h3 class="app__aside__estatistica__title">Geral</h3>
+            <ul class="app__aside__estatistica__content">
+              <li class="app__aside__estatistica__item">Tempo médio de pouso: <span data-media-pouso="geral">--</span></li>
+              <li class="app__aside__estatistica__item">Tempo médio de decolagem: <span data-media-decolagem="geral">--</span></li>
+              <li class="app__aside__estatistica__item">Aviões que aterrissaram sem combustível: <span data-avioes-emergencia="geral">--</span></li>
+            </ul>
+          </li>
+          <li class="app__aside__estatistica" data-estatistica="pista-1">
+            <h3 class="app__aside__estatistica__title">Pista 1</h3>
+            <ul class="app__aside__estatistica__content">
+              <li class="app__aside__estatistica__item">Tempo médio de pouso: <span data-media-pouso="pista-1">--</span></li>
+              <li class="app__aside__estatistica__item">Tempo médio de decolagem: <span data-media-decolagem="pista-1">--</span></li>
+              <li class="app__aside__estatistica__item">Aviões que aterrissaram sem combustível: <span data-avioes-emergencia="pista-1">--</span></li>
+            </ul>
+          </li>
+          <li class="app__aside__estatistica" data-estatistica="pista-2">
+            <h3 class="app__aside__estatistica__title">Pista 2</h3>
+            <ul class="app__aside__estatistica__content">
+              <li class="app__aside__estatistica__item">Tempo médio de pouso: <span data-media-pouso="pista-2">--</span></li>
+              <li class="app__aside__estatistica__item">Tempo médio de decolagem: <span data-media-decolagem="pista-2">--</span></li>
+              <li class="app__aside__estatistica__item">Aviões que aterrissaram sem combustível: <span data-avioes-emergencia="pista-2">--</span></li>
+            </ul>
+          </li>
+          <li class="app__aside__estatistica" data-estatistica="pista-3">
+            <h3 class="app__aside__estatistica__title">Pista 3</h3>
+            <ul class="app__aside__estatistica__content">
+              <li class="app__aside__estatistica__item">Tempo médio de pouso: <span data-media-pouso="pista-3">--</span></li>
+              <li class="app__aside__estatistica__item">Tempo médio de decolagem: <span data-media-decolagem="pista-3">--</span></li>
+              <li class="app__aside__estatistica__item">Aviões que aterrissaram sem combustível: <span data-avioes-emergencia="pista-3">--</span></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </aside>
+    <main class="app__main">
+      <section class="aeroporto">
+
+      </section>
+      <section class="prateleiras">
+        <ul>
+          <li>
+            <h2>Pista 1</h2>
+            <div class="container-filas">
+              <div class="fila">
+                <h3>Pouso 1</h3>
+                <ul id="fila-pouso-1" class="pista-lista">
+                </ul>
+              </div>
+              <div class="fila">
+                <h3>Pouso 2</h3>
+                <ul id="fila-pouso-2" class="pista-lista"></ul>
+              </div>
+              <div class="fila">
+                <h3>Decolagem 1</h3>
+                <ul id="fila-decolagem-1" class="pista-lista"></ul>
+              </div>
+            </div>
+          </li>
+          <li>
+            <h2>Pista 2</h2>
+            <div class="container-filas">
+              <div class="fila">
+                <h3>Pouso 3</h3>
+                <ul id="fila-pouso-3" class="pista-lista">
+                </ul>
+              </div>
+              <div class="fila">
+                <h3>Pouso 3</h3>
+                <ul id="fila-pouso-4" class="pista-lista"></ul>
+              </div>
+              <div class="fila">
+                <h3>Decolagem 2</h3>
+                <ul id="fila-decolagem-3" class="pista-lista"></ul>
+              </div>
+            </div>
+          </li>
+          <li>
+            <h2>Pista 3</h2>
+            <div class="container-filas">
+              <div class="fila">
+                <h3>Pouso 5</h3>
+                <ul id="fila-pouso-5" class="pista-lista">
+                </ul>
+              </div>
+              <div class="fila">
+                <h3>Pouso 6</h3>
+                <ul id="fila-pouso-6" class="pista-lista"></ul>
+              </div>
+              <div class="fila">
+                <h3>Decolagem 3</h3>
+                <ul id="fila-decolagem-3" class="pista-lista"></ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

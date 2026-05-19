@@ -1,0 +1,1 @@
+export type Estagio = 'INICIOU' | 'EM' | 'FINALIZOU' | 'CAIU';
