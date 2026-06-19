@@ -1,5 +1,6 @@
-const Operacoes = {
+export const Operacao = {
   POUSO: 'POUSO',
   DECOLAGEM: 'DECOLAGEM'
-} as const
-export type Operacao = (typeof Operacoes)[keyof typeof Operacoes];
+} as const;
+
+export type Operacao = typeof Operacao[keyof typeof Operacao];

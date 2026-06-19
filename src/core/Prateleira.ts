@@ -1,87 +1,118 @@
-import { Aviao } from './Aviao';
+import { Operacao } from "../types/Operacao";
+import type { Aviao } from "./Aviao";
 
-export class Prateleira {
-  private _cabeca: Nodo | null;
-  private _cauda: Nodo | null;
-  private _tamanho: number;
 
-  constructor() {
-    this._cabeca = null;
-    this._cauda = null;
-    this._tamanho = 0;
-  }
+class Node {
+    public prev: Node | null = null;
+    public next: Node | null = null;
+    public readonly aviao: Aviao;
 
-  public get tamanho() {
-    return this._tamanho;
-  }
-
-  public get vazia() {
-    return this._tamanho === 0;
-  }
-
-  public adicionarAviao(aviao: Aviao): void {
-    const novoNodo: Nodo = {
-      prev: null,
-      next: null,
-      value: aviao,
-    };
-
-    if (this._cabeca === null) {
-      this._cabeca = novoNodo;
-      this._cauda = novoNodo;
-    } else {
-      this._cauda!.next = novoNodo;
-      novoNodo.prev = this._cauda;
-      this._cauda = novoNodo;
+    constructor(aviao: Aviao) {
+        this.aviao = aviao;
     }
-    this._tamanho++;
-  }
-
-  public removerPrimeiroAviao(): Aviao | null {
-    if (this._cabeca === null) {
-      return null;
-    }
-
-    const aviao = this._cabeca.value;
-    this._cabeca = this._cabeca.next;
-
-    if (this._cabeca === null) {
-      this._cauda = null;
-    } else {
-      this._cabeca.prev = null;
-    }
-
-    this._tamanho--;
-    return aviao;
-  }
-
-  public removerAviao(aviao: Aviao): Aviao | null {
-    if (this._cauda === null) {
-      return null;
-    }
-    let nodoAtual: Nodo | null = this._cauda;
-    while (nodoAtual !== null) {
-      if (nodoAtual.value === aviao) {
-        if (nodoAtual.prev !== null) {
-          nodoAtual.prev.next = nodoAtual.next;
-        } else {
-          this._cabeca = nodoAtual.next;
-        }
-        if (nodoAtual.next !== null) {
-          nodoAtual.next.prev = nodoAtual.prev;
-        } else {
-          this._cauda = nodoAtual.prev;
-        }
-      }
-      nodoAtual = nodoAtual.prev;
-    }
-    this._tamanho--;
-    return aviao;
-  }
 }
 
-interface Nodo {
-  prev: Nodo | null;
-  next: Nodo | null;
-  value: Aviao;
+export class Prateleira {
+    private _tamanho = 0;
+    private cabeca: Node | null = null;
+    private cauda: Node | null = null;
+    public readonly id: number;
+    public readonly operacaoPermitida: Operacao;
+
+    constructor(id: number, operacaoPermitida: Operacao) {
+        this.id = id;
+        this.operacaoPermitida = operacaoPermitida;
+    }
+
+    get tamanho(): number {
+        return this._tamanho;
+    }
+
+    public isVazia(): boolean {
+        return this._tamanho === 0;
+    }
+
+    public adicionar(aviao: Aviao): void {
+        const novoNo = new Node(aviao);
+        if (!this.cabeca) {
+            this.cabeca = novoNo;
+            this.cauda = novoNo;
+        } else {
+            novoNo.prev = this.cauda;
+            if (this.cauda) this.cauda.next = novoNo;
+            this.cauda = novoNo;
+        }
+        this._tamanho++;
+    }
+
+    public verPrimeiroAviao(): Aviao | null {
+        return this.cabeca ? this.cabeca.aviao : null;
+    }
+
+    public removerPrimeiroAviao(): Aviao | null {
+        if (!this.cabeca) return null;
+
+        const aviao = this.cabeca.aviao;
+        this._tamanho--;
+
+        if (this.cabeca === this.cauda) {
+            this.cabeca = null;
+            this.cauda = null;
+        } else {
+            this.cabeca = this.cabeca.next;
+            if (this.cabeca) this.cabeca.prev = null;
+        }
+        return aviao;
+    }
+
+    public obterEmergencias(): Aviao[] {
+        const emergencias: Aviao[] = [];
+        let atual = this.cabeca;
+        while (atual) {
+            if (atual.aviao.operacao === Operacao.POUSO && atual.aviao.combustivel === 0) {
+                emergencias.push(atual.aviao);
+            }
+            atual = atual.next;
+        }
+        return emergencias;
+    }
+
+    public remover(aviao: Aviao): boolean {
+        let atual = this.cabeca;
+        while (atual) {
+            if (atual.aviao.id === aviao.id) {
+                if (atual === this.cabeca) this.cabeca = atual.next;
+                else if (atual.prev) atual.prev.next = atual.next;
+
+                if (atual === this.cauda) this.cauda = atual.prev;
+                else if (atual.next) atual.next.prev = atual.prev;
+
+                this._tamanho--;
+                return true;
+            }
+            atual = atual.next;
+        }
+        return false;
+    }
+
+    public atualizarTempoDeEspera(): void {
+        let atual = this.cabeca;
+        while (atual) {
+            atual.aviao.incrementarTempoDeEspera();
+            if (atual.aviao.operacao === Operacao.POUSO && atual.aviao.combustivel > 0) {
+                atual.aviao.decrementarCombustivel();
+            }
+            atual = atual.next;
+        }
+    }
+
+    public toArray(): Aviao[] {
+        const arr: Aviao[] = [];
+        let atual = this.cabeca;
+        while (atual) {
+            arr.push(atual.aviao);
+            atual = atual.next;
+        }
+        return arr;
+    }
 }
