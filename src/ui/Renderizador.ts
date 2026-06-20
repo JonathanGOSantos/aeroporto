@@ -122,4 +122,11 @@ export class Renderizador {
             $btnAtivo.classList.add('ativo');
         }
     }
+
+    atualizarInstante(instante: number) {
+        const $display = document.getElementById('display-instante');
+        if ($display) {
+            $display.textContent = instante.toString();
+        }
+    }
 }

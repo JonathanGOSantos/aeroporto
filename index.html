@@ -1,74 +1,56 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-PT">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Torre de Controle - Aeroporto</title>
+  <title>Torre de Controlo - Aeroporto</title>
 </head>
 
 <body>
   <div id="app" class="app">
-    <aside class="app__aside">
+    
+    <aside class="app__aside card">
       <header class="app__aside__header">
         <h1 class="title">Aeroporto</h1>
         <div class="divisor"></div>
-        <h2 class="subtitle">Torre de controle</h2>
+        <h2 class="subtitle">Torre de Controlo</h2>
       </header>
+      
       <section class="app__aside__content">
         <ul class="app__aside__estatisticas">
           <li class="app__aside__estatistica" data-estatistica="geral">
-            <h3 class="app__aside__estatistica__title">Geral</h3>
+            <h3 class="app__aside__estatistica__title">Estatísticas Gerais</h3>
             <ul class="app__aside__estatistica__content">
-              <li class="app__aside__estatistica__item">Tempo médio de pouso: <span data-media-pouso="geral">--</span>
+              <li class="app__aside__estatistica__item">
+                <span>Tempo médio de pouso:</span> 
+                <strong data-media-pouso="geral">--</strong>
               </li>
-              <li class="app__aside__estatistica__item">Tempo médio de decolagem: <span
-                  data-media-decolagem="geral">--</span></li>
-              <li class="app__aside__estatistica__item">Aviões que aterrissaram sem combustível: <span
-                  data-avioes-emergencia="geral">--</span></li>
-            </ul>
-          </li>
-          <li class="app__aside__estatistica" data-estatistica="pista-1">
-            <h3 class="app__aside__estatistica__title">Pista 1</h3>
-            <ul class="app__aside__estatistica__content">
-              <li class="app__aside__estatistica__item">Tempo médio de pouso: <span data-media-pouso="pista-1">--</span>
+              <li class="app__aside__estatistica__item">
+                <span>Tempo médio de decolagem:</span> 
+                <strong data-media-decolagem="geral">--</strong>
               </li>
-              <li class="app__aside__estatistica__item">Tempo médio de decolagem: <span
-                  data-media-decolagem="pista-1">--</span></li>
-              <li class="app__aside__estatistica__item">Aviões que aterrissaram sem combustível: <span
-                  data-avioes-emergencia="pista-1">--</span></li>
-            </ul>
-          </li>
-          <li class="app__aside__estatistica" data-estatistica="pista-2">
-            <h3 class="app__aside__estatistica__title">Pista 2</h3>
-            <ul class="app__aside__estatistica__content">
-              <li class="app__aside__estatistica__item">Tempo médio de pouso: <span data-media-pouso="pista-2">--</span>
+              <li class="app__aside__estatistica__item">
+                <span>Aterrissagens sem combustível:</span> 
+                <strong class="alerta" data-avioes-emergencia="geral">--</strong>
               </li>
-              <li class="app__aside__estatistica__item">Tempo médio de decolagem: <span
-                  data-media-decolagem="pista-2">--</span></li>
-              <li class="app__aside__estatistica__item">Aviões que aterrissaram sem combustível: <span
-                  data-avioes-emergencia="pista-2">--</span></li>
-            </ul>
-          </li>
-          <li class="app__aside__estatistica" data-estatistica="pista-3">
-            <h3 class="app__aside__estatistica__title">Pista 3</h3>
-            <ul class="app__aside__estatistica__content">
-              <li class="app__aside__estatistica__item">Tempo médio de pouso: <span data-media-pouso="pista-3">--</span>
-              </li>
-              <li class="app__aside__estatistica__item">Tempo médio de decolagem: <span
-                  data-media-decolagem="pista-3">--</span></li>
-              <li class="app__aside__estatistica__item">Aviões que aterrissaram sem combustível: <span
-                  data-avioes-emergencia="pista-3">--</span></li>
             </ul>
           </li>
         </ul>
       </section>
     </aside>
-    <section class="app__aeroporto">
+
+    <section class="app__aeroporto card">
       <div class="app__controles-tempo">
-        <button id="btn-play-pause" class="btn-controle">▶ Play</button>
-        <button id="btn-avancar-passo" class="btn-controle" title="Avançar uma fase (Apenas pausado)">⏭ Avançar</button>
+        <div class="app__controles-acoes">
+          <button id="btn-play-pause" class="btn-controle btn-primario">▶ Play</button>
+          <button id="btn-avancar-passo" class="btn-controle" title="Avançar uma fase (Apenas pausado)">⏭ Avançar</button>
+        </div>
+
+        <div class="app__relogio" title="Tempo da Simulação">
+          <span class="app__relogio-label">Instante:</span>
+          <strong id="display-instante" class="app__relogio-valor">1</strong>
+        </div>
         
         <div class="app__velocidades">
           <button id="btn-vel-1" class="btn-velocidade ativo" data-vel="1">1x</button>
@@ -77,48 +59,20 @@
         </div>
       </div>
 
-      <button id="btn-abrir-modal">Adicionar avião</button>
-      <button id="remover" style="display: none;">Remover avião</button> </section>
-
-    <div id="modal-aviao" class="modal">
-      <div class="modal__conteudo">
-        <span id="btn-fechar-modal" class="modal__fechar">&times;</span>
-        <h2 class="modal__titulo">Injetar Novo Avião</h2>
-        
-        <form id="form-novo-aviao" class="modal__form">
-          <div class="modal__campo">
-            <label for="form-operacao">Operação</label>
-            <select id="form-operacao" required>
-              <option value="DECOLAGEM">Decolagem</option>
-              <option value="POUSO">Pouso</option>
-            </select>
-          </div>
-
-          <div class="modal__campo" id="campo-combustivel" style="display: none;">
-            <label for="form-combustivel">Combustível Inicial (1 a 20)</label>
-            <input type="number" id="form-combustivel" min="0" max="20" value="10">
-          </div>
-
-          <div class="modal__campo">
-            <label for="form-alocacao">Alocação de Prateleira</label>
-            <select id="form-alocacao" required>
-              <option value="AUTOMATICA">Automática (Algoritmo da Torre)</option>
-              </select>
-          </div>
-
-          <button type="submit" class="modal__btn-enviar">Adicionar à Fila</button>
-        </form>
+      <div class="app__acoes-aviao">
+        <button id="btn-abrir-modal" class="btn-adicionar">+ Adicionar Avião</button>
+        <button id="remover" style="display: none;">Remover avião</button>
       </div>
-    </div>
-    <section class="app__prateleiras">
-      <ul>
-        <li>
-          <h2>Pista 1</h2>
+    </section>
+
+    <section class="app__prateleiras card">
+      <ul class="pistas-grid">
+        <li class="pista-coluna">
+          <h2 class="pista-titulo">Pista 1</h2>
           <div class="app__prateleiras__filas">
             <div class="app__prateleiras__fila">
               <h3 class="app__prateleiras__fila__titulo">Pouso 1</h3>
-              <ul id="fila-pouso-1" class="app__prateleiras__fila__lista">
-              </ul>
+              <ul id="fila-pouso-1" class="app__prateleiras__fila__lista"></ul>
             </div>
             <div class="app__prateleiras__fila">
               <h3 class="app__prateleiras__fila__titulo">Pouso 2</h3>
@@ -130,13 +84,12 @@
             </div>
           </div>
         </li>
-        <li>
-          <h2>Pista 2</h2>
+        <li class="pista-coluna">
+          <h2 class="pista-titulo">Pista 2</h2>
           <div class="app__prateleiras__filas">
             <div class="app__prateleiras__fila">
               <h3 class="app__prateleiras__fila__titulo">Pouso 3</h3>
-              <ul id="fila-pouso-3" class="app__prateleiras__fila__lista">
-              </ul>
+              <ul id="fila-pouso-3" class="app__prateleiras__fila__lista"></ul>
             </div>
             <div class="app__prateleiras__fila">
               <h3 class="app__prateleiras__fila__titulo">Pouso 4</h3>
@@ -148,13 +101,12 @@
             </div>
           </div>
         </li>
-        <li>
-          <h2>Pista 3</h2>
+        <li class="pista-coluna">
+          <h2 class="pista-titulo">Pista 3</h2>
           <div class="app__prateleiras__filas">
             <div class="app__prateleiras__fila desabilitada">
               <h3 class="app__prateleiras__fila__titulo">Pouso 5</h3>
-              <ul id="fila-pouso-5" class="app__prateleiras__fila__lista">
-              </ul>
+              <ul id="fila-pouso-5" class="app__prateleiras__fila__lista"></ul>
             </div>
             <div class="app__prateleiras__fila desabilitada">
               <h3 class="app__prateleiras__fila__titulo">Pouso 6</h3>
@@ -168,8 +120,40 @@
         </li>
       </ul>
     </section>
+
   </div>
+
+  <div id="modal-aviao" class="modal">
+    <div class="modal__conteudo">
+      <span id="btn-fechar-modal" class="modal__fechar">&times;</span>
+      <h2 class="modal__titulo">Injetar Novo Avião</h2>
+      
+      <form id="form-novo-aviao" class="modal__form">
+        <div class="modal__campo">
+          <label for="form-operacao">Operação</label>
+          <select id="form-operacao" required>
+            <option value="DECOLAGEM">Decolagem</option>
+            <option value="POUSO">Pouso</option>
+          </select>
+        </div>
+
+        <div class="modal__campo" id="campo-combustivel" style="display: none;">
+          <label for="form-combustivel">Combustível Inicial (1 a 20)</label>
+          <input type="number" id="form-combustivel" min="0" max="20" value="10">
+        </div>
+
+        <div class="modal__campo">
+          <label for="form-alocacao">Alocação de Prateleira</label>
+          <select id="form-alocacao" required>
+            <option value="AUTOMATICA">Automática (Algoritmo da Torre)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="modal__btn-enviar">Adicionar à Fila</button>
+      </form>
+    </div>
+  </div>
+
   <script type="module" src="/src/main.ts"></script>
 </body>
-
 </html>
