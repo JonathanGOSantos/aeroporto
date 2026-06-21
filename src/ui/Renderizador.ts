@@ -25,8 +25,8 @@ export class Renderizador {
     const $icon = document.createElement('img') as HTMLImageElement;
     $icon.src =
       aviao.operacao == Operacao.DECOLAGEM
-        ? '/icons/Decolar.svg'
-        : '/icons/Aterrissar.svg';
+        ? './icons/Decolar.svg'
+        : './icons/Aterrissar.svg';
 
     const $infoContainer = document.createElement('div');
     $infoContainer.classList.add('item-info');
