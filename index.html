@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Torre de Controlo - Aeroporto</title>
+  <script type="module" crossorigin src="/aeroporto/assets/index-D_8HqfY4.js"></script>
+  <link rel="stylesheet" crossorigin href="/aeroporto/assets/index-cqWyN1MP.css">
+</head>
+
+<body>
+  <div id="app" class="app">
+    
+    <aside class="app__aside card">
+      <header class="app__aside__header">
+        <h1 class="title">Aeroporto</h1>
+        <div class="divisor"></div>
+        <h2 class="subtitle">Torre de Controlo</h2>
+      </header>
+      
+      <section class="app__aside__content">
+        <ul class="app__aside__estatisticas">
+          <li class="app__aside__estatistica" id="estatistica-geral">
+            <h3 class="app__aside__estatistica__title">Estatísticas Gerais</h3>
+            <ul class="app__aside__estatistica__content">
+              <li class="app__aside__estatistica__item">
+                <span>Tempo médio de pouso:</span> 
+                <strong id="media-pouso-geral">--</strong>
+              </li>
+              <li class="app__aside__estatistica__item">
+                <span>Tempo médio de decolagem:</span> 
+                <strong id="media-decolagem-geral">--</strong>
+              </li>
+              <li class="app__aside__estatistica__item">
+                <span>Aterrissagens sem combustível:</span> 
+                <strong class="alerta" id="avioes-emergencia-geral">--</strong>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <button type="button" id="btn-exportar">Exportar</button>
+      </section>
+    </aside>
+
+    <section class="app__aeroporto card">
+      <div class="app__controles-tempo">
+        <div class="app__controles-acoes">
+          <button id="btn-play-pause" class="btn-controle btn-primario">▶ Play</button>
+          <button id="btn-avancar-passo" class="btn-controle" title="Avançar uma fase (Apenas pausado)">⏭ Avançar</button>
+        </div>
+
+        <div class="app__relogio" title="Tempo da Simulação">
+          <span class="app__relogio-label">Instante:</span>
+          <strong id="display-instante" class="app__relogio-valor">1</strong>
+        </div>
+        
+        <div class="app__velocidades">
+          <button id="btn-vel-1" class="btn-velocidade ativo" data-vel="1">1x</button>
+          <button id="btn-vel-2" class="btn-velocidade" data-vel="2">2x</button>
+          <button id="btn-vel-4" class="btn-velocidade" data-vel="4">4x</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="app__prateleiras card">
+      <ul class="pistas-grid">
+        <li class="pista-coluna">
+          <h2 class="pista-titulo">Pista 1</h2>
+          <div class="app__prateleiras__filas">
+            <div class="app__prateleiras__fila">
+              <h3 class="app__prateleiras__fila__titulo">Pouso 1</h3>
+              <ul id="fila-pouso-1" class="app__prateleiras__fila__lista"></ul>
+            </div>
+            <div class="app__prateleiras__fila">
+              <h3 class="app__prateleiras__fila__titulo">Pouso 2</h3>
+              <ul id="fila-pouso-2" class="app__prateleiras__fila__lista"></ul>
+            </div>
+            <div class="app__prateleiras__fila">
+              <h3 class="app__prateleiras__fila__titulo">Decolagem 1</h3>
+              <ul id="fila-decolagem-1" class="app__prateleiras__fila__lista"></ul>
+            </div>
+          </div>
+        </li>
+        <li class="pista-coluna">
+          <h2 class="pista-titulo">Pista 2</h2>
+          <div class="app__prateleiras__filas">
+            <div class="app__prateleiras__fila">
+              <h3 class="app__prateleiras__fila__titulo">Pouso 3</h3>
+              <ul id="fila-pouso-3" class="app__prateleiras__fila__lista"></ul>
+            </div>
+            <div class="app__prateleiras__fila">
+              <h3 class="app__prateleiras__fila__titulo">Pouso 4</h3>
+              <ul id="fila-pouso-4" class="app__prateleiras__fila__lista"></ul>
+            </div>
+            <div class="app__prateleiras__fila">
+              <h3 class="app__prateleiras__fila__titulo">Decolagem 2</h3>
+              <ul id="fila-decolagem-2" class="app__prateleiras__fila__lista"></ul>
+            </div>
+          </div>
+        </li>
+        <li class="pista-coluna">
+          <h2 class="pista-titulo">Pista 3</h2>
+          <div class="app__prateleiras__filas">
+            <div class="app__prateleiras__fila desabilitada">
+              <h3 class="app__prateleiras__fila__titulo">Pouso 5</h3>
+              <ul id="fila-pouso-5" class="app__prateleiras__fila__lista"></ul>
+            </div>
+            <div class="app__prateleiras__fila desabilitada">
+              <h3 class="app__prateleiras__fila__titulo">Pouso 6</h3>
+              <ul id="fila-pouso-6" class="app__prateleiras__fila__lista"></ul>
+            </div>
+            <div class="app__prateleiras__fila">
+              <h3 class="app__prateleiras__fila__titulo">Decolagem 3</h3>
+              <ul id="fila-decolagem-3" class="app__prateleiras__fila__lista"></ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+
+</body>
+</html>
