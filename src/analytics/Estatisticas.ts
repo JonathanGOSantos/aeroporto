@@ -10,7 +10,6 @@ export class Estatisticas {
   private _tempoTotalParaDecolagem = 0;
   private _totalAvioesPousaramSemCombustivel = 0;
 
-  // Guarda o histórico para você poder renderizar na interface depois
   private _registros: Registro[] = [];
 
   novoRegistro(
@@ -95,5 +94,10 @@ export class Estatisticas {
 
   get historico(): Registro[] {
     return this._registros;
+  }
+
+  // TODO: Criar um link para download dos registros
+  exportar(): void {
+    // const conteudo = Object.groupBy(this._registros, registro => registro.instante);
   }
 }

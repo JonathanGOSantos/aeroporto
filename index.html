@@ -19,24 +19,25 @@
       
       <section class="app__aside__content">
         <ul class="app__aside__estatisticas">
-          <li class="app__aside__estatistica" data-estatistica="geral">
+          <li class="app__aside__estatistica" id="estatistica-geral">
             <h3 class="app__aside__estatistica__title">Estatísticas Gerais</h3>
             <ul class="app__aside__estatistica__content">
               <li class="app__aside__estatistica__item">
                 <span>Tempo médio de pouso:</span> 
-                <strong data-media-pouso="geral">--</strong>
+                <strong id="media-pouso-geral">--</strong>
               </li>
               <li class="app__aside__estatistica__item">
                 <span>Tempo médio de decolagem:</span> 
-                <strong data-media-decolagem="geral">--</strong>
+                <strong id="media-decolagem-geral">--</strong>
               </li>
               <li class="app__aside__estatistica__item">
                 <span>Aterrissagens sem combustível:</span> 
-                <strong class="alerta" data-avioes-emergencia="geral">--</strong>
+                <strong class="alerta" id="avioes-emergencia-geral">--</strong>
               </li>
             </ul>
           </li>
         </ul>
+        <button type="button" id="btn-exportar">Exportar</button>
       </section>
     </aside>
 
@@ -57,11 +58,6 @@
           <button id="btn-vel-2" class="btn-velocidade" data-vel="2">2x</button>
           <button id="btn-vel-4" class="btn-velocidade" data-vel="4">4x</button>
         </div>
-      </div>
-
-      <div class="app__acoes-aviao">
-        <button id="btn-abrir-modal" class="btn-adicionar">+ Adicionar Avião</button>
-        <button id="remover" style="display: none;">Remover avião</button>
       </div>
     </section>
 
@@ -121,37 +117,6 @@
       </ul>
     </section>
 
-  </div>
-
-  <div id="modal-aviao" class="modal">
-    <div class="modal__conteudo">
-      <span id="btn-fechar-modal" class="modal__fechar">&times;</span>
-      <h2 class="modal__titulo">Injetar Novo Avião</h2>
-      
-      <form id="form-novo-aviao" class="modal__form">
-        <div class="modal__campo">
-          <label for="form-operacao">Operação</label>
-          <select id="form-operacao" required>
-            <option value="DECOLAGEM">Decolagem</option>
-            <option value="POUSO">Pouso</option>
-          </select>
-        </div>
-
-        <div class="modal__campo" id="campo-combustivel" style="display: none;">
-          <label for="form-combustivel">Combustível Inicial (1 a 20)</label>
-          <input type="number" id="form-combustivel" min="0" max="20" value="10">
-        </div>
-
-        <div class="modal__campo">
-          <label for="form-alocacao">Alocação de Prateleira</label>
-          <select id="form-alocacao" required>
-            <option value="AUTOMATICA">Automática (Algoritmo da Torre)</option>
-          </select>
-        </div>
-
-        <button type="submit" class="modal__btn-enviar">Adicionar à Fila</button>
-      </form>
-    </div>
   </div>
 
   <script type="module" src="/src/main.ts"></script>

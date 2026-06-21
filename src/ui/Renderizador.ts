@@ -33,21 +33,16 @@ export class Renderizador {
 
     const $id = document.createElement('span') as HTMLSpanElement;
     $id.textContent = `#${aviao.id}`;
-
-    const $combustivel = document.createElement('span') as HTMLSpanElement;
-    $combustivel.classList.add('combustivel');
-    $combustivel.id = `combustivel-aviao-${aviao.id}`;
-    if (aviao.operacao === Operacao.POUSO) {
-      $combustivel.textContent = `${aviao.combustivel}L`;
-      if (aviao.combustivel === 0) {
-        $combustivel.classList.add('alerta');
-      }
-    } else {
-      $combustivel.textContent = `--`;
-    }
-
+    
     $infoContainer.appendChild($id);
-    $infoContainer.appendChild($combustivel);
+
+    if (aviao.operacao === Operacao.POUSO) {
+      const $combustivel = document.createElement('span') as HTMLSpanElement;
+      $combustivel.classList.add('combustivel');
+      $combustivel.id = `combustivel-aviao-${aviao.id}`;
+      $combustivel.textContent = `${aviao.combustivel}L`;
+      $infoContainer.appendChild($combustivel);
+    } 
 
     $listItem.appendChild($icon);
     $listItem.appendChild($infoContainer);
@@ -86,12 +81,10 @@ export class Renderizador {
   }
 
   atualizarPainelEstatisticas(estatisticas: Estatisticas) {
-        // Busca os elementos do bloco "Geral"
-        const $mediaPousoGeral = document.querySelector('[data-media-pouso="geral"]');
-        const $mediaDecolagemGeral = document.querySelector('[data-media-decolagem="geral"]');
-        const $emergenciaGeral = document.querySelector('[data-avioes-emergencia="geral"]');
+        const $mediaPousoGeral = document.getElementById('media-pouso-geral');
+        const $mediaDecolagemGeral = document.getElementById('media-decolagem-geral');
+        const $emergenciaGeral = document.getElementById('avioes-emergencia-geral');
 
-        // Atualiza os valores na tela
         if ($mediaPousoGeral) {
             $mediaPousoGeral.textContent = estatisticas.tempoMedioDePouso.toFixed(2);
         }
@@ -111,12 +104,10 @@ export class Renderizador {
             $btnPlayPause.textContent = pausado ? "▶ Play" : "⏸ Pause";
         }
 
-        // 1. Remove a classe 'ativo' de todos os botões de velocidade
         document.querySelectorAll('.btn-velocidade').forEach($btn => {
             $btn.classList.remove('ativo');
         });
         
-        // 2. Adiciona a classe 'ativo' apenas no botão correspondente
         const $btnAtivo = document.getElementById(`btn-vel-${velocidade}`);
         if ($btnAtivo) {
             $btnAtivo.classList.add('ativo');

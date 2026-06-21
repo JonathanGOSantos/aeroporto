@@ -7,6 +7,8 @@
   --bg-body: #f4f4f9;
   --bg-card: #ffffff;
   --text-main: #1a1a1a;
+  --text-subtitle: #666666;
+  --hover-color: #d9e3f8;
   --border-color: #e0e0e0;
   --accent-color: #2563eb;
   --danger-color: #dc2626;
@@ -24,12 +26,7 @@ body {
   color: var(--text-main);
 }
 
-h3 {
-  font-size: 1.125rem;
-  font-weight: 600;
-}
 
-/* Classe utilitária para os blocos principais */
 .card {
   background-color: var(--bg-card);
   border-radius: 0.75rem;
@@ -39,17 +36,15 @@ h3 {
   padding: 1.5rem;
 }
 
-/* Layout Principal Responsivo */
 .app {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding: 1.5rem;
   min-height: 100svh;
-  max-width: 1600px;
-  margin: 0 auto; // Centra no ecrã em resoluções gigantes
+  max-width: 1440px;
+  margin: 0 auto;
 
-  // Breakpoint para Desktop/Tablet Landscape
   @media (min-width: 1024px) {
     display: grid;
     grid-template-columns: 320px 1fr;
@@ -57,7 +52,7 @@ h3 {
     grid-template-areas:
       'aside controles'
       'aside prateleiras';
-    align-items: start; // Impede que os cards estiquem verticalmente sem necessidade
+    align-items: start;
   }
 
   &__aside {
@@ -71,7 +66,7 @@ h3 {
         font-size: 2.5rem;
       }
       .subtitle {
-        color: #666;
+        color: var(--text-subtitle);
         font-weight: normal;
       }
       .divisor {
@@ -104,7 +99,7 @@ h3 {
   &__aeroporto {
     grid-area: controles;
     display: flex;
-    flex-wrap: wrap; // Permite quebrar linha em telemóveis
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     gap: 1.5rem;
@@ -143,7 +138,7 @@ h3 {
         &-valor {
           color: var(--accent-color);
           font-size: 1.5rem;
-          min-width: 2ch; // Garante que números não façam o texto "pular"
+          min-width: 2ch;
           text-align: center;
         }
       }
@@ -158,13 +153,13 @@ h3 {
         transition: all 0.2s;
 
         &:hover {
-          background-color: #e5e7eb;
+          background-color: var(--hover-color);
         }
         &.btn-primario {
           background-color: var(--accent-color);
           color: white;
           &:hover {
-            background-color: #333;
+            background-color: var(--text-subtitle);
           }
         }
       }
@@ -221,7 +216,6 @@ h3 {
     .pistas-grid {
       list-style: none;
       display: grid;
-      // Magia da responsividade: cria colunas que se adaptam. Mínimo 280px.
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
       height: 100%;
@@ -249,9 +243,9 @@ h3 {
       gap: 1rem;
 
       .desabilitada {
-        opacity: 50%;
+        opacity: 40%;
         filter: grayscale(100%);
-        pointer-events: none; // Impede interações
+        pointer-events: none;
       }
     }
 
@@ -283,14 +277,6 @@ h3 {
         width: 100%;
         overflow-x: auto;
         overflow-y: hidden;
-
-        &::-webkit-scrollbar {
-          height: 6px;
-        }
-        &::-webkit-scrollbar-thumb {
-          background-color: #cbd5e1;
-          border-radius: 6px;
-        }
       }
 
       &__item {
@@ -333,101 +319,6 @@ h3 {
           }
         }
       }
-    }
-  }
-}
-
-/* Modal Responsivo */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 100;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(2px);
-  align-items: center;
-  justify-content: center;
-
-  &.ativo {
-    display: flex;
-  }
-
-  &__conteudo {
-    background-color: var(--bg-card);
-    padding: 2rem;
-    border-radius: 1rem;
-    width: 90%;
-    max-width: 450px; // Mais responsivo
-    position: relative;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  }
-
-  &__fechar {
-    position: absolute;
-    right: 1.5rem;
-    top: 1rem;
-    font-size: 2rem;
-    cursor: pointer;
-    color: #999;
-    transition: color 0.2s;
-    &:hover {
-      color: var(--text-main);
-    }
-  }
-
-  &__titulo {
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--bg-body);
-    padding-bottom: 0.5rem;
-  }
-
-  &__form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  &__campo {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    label {
-      font-weight: 600;
-      color: #444;
-    }
-
-    select,
-    input {
-      font-size: 1.1rem;
-      padding: 0.75rem;
-      border: 1px solid var(--border-color);
-      border-radius: 0.5rem;
-      background: var(--bg-body);
-      outline: none;
-      &:focus {
-        border-color: var(--accent-color);
-      }
-    }
-  }
-
-  &__btn-enviar {
-    margin-top: 1rem;
-    font-size: 1.25rem;
-    padding: 0.75rem;
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.2s;
-    &:hover {
-      background-color: #1d4ed8;
     }
   }
 }
